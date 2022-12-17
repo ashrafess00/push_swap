@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 17:51:40 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/11/29 18:14:12 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/16 20:18:05 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_stack_a	*cr_stack_a(int size)
 	new_stack->top = -1;
 	new_stack->size = size;
 	new_stack->num_arr = (int *)malloc(sizeof(int) * size);
+	new_stack->instructions = (int **) malloc(6 * sizeof(int *));
 	return (new_stack);
 }
 
@@ -54,6 +55,7 @@ void	swap_a(t_stack_a *stack_a)
 	temp = stack_a->num_arr[stack_a->top - 1];
 	stack_a->num_arr[stack_a->top - 1] = stack_a->num_arr[stack_a->top];
 	stack_a->num_arr[stack_a->top] = temp;
+	ft_printf("sa\n");
 }
 
 void	swap_b(t_stack_b *stack_b)
@@ -63,6 +65,7 @@ void	swap_b(t_stack_b *stack_b)
 	temp = stack_b->num_arr[stack_b->top - 1];
 	stack_b->num_arr[stack_b->top - 1] = stack_b->num_arr[stack_b->top];
 	stack_b->num_arr[stack_b->top] = temp;
+	ft_printf("sb\n");
 }
 
 void	print_nums_a(t_stack_a *stack_a)
@@ -94,6 +97,7 @@ void	push_a(t_stack_a *stack_a, t_stack_b *stack_b)
 	stack_a->top += 1;
 	stack_a->num_arr[stack_a->top] = stack_b->num_arr[stack_b->top];
 	stack_b->top -= 1;
+	ft_printf("pa\n");
 }
 
 void	push_b(t_stack_a *stack_a, t_stack_b *stack_b)
@@ -101,6 +105,7 @@ void	push_b(t_stack_a *stack_a, t_stack_b *stack_b)
 	stack_b->top += 1;
 	stack_b->num_arr[stack_b->top] = stack_a->num_arr[stack_a->top];
 	stack_a->top -= 1;
+	ft_printf("pb\n");
 }
 
 void	rotate_a(t_stack_a *stack_a)
@@ -113,6 +118,41 @@ void	rotate_a(t_stack_a *stack_a)
 	while (i-- > 0)
 		stack_a->num_arr[i] = stack_a->num_arr[i - 1];
 	stack_a->num_arr[0] = last_num;
+	ft_printf("ra\n");
+}
+
+void	rotate_b(t_stack_b *stack_b)
+{
+	int	last_num;
+	int	i;
+
+	last_num = stack_b->num_arr[stack_b->top];
+	i = stack_b->top + 1;
+	while (i-- > 0)
+		stack_b->num_arr[i] = stack_b->num_arr[i - 1];
+	stack_b->num_arr[0] = last_num;
+	ft_printf("rb\n");
+}
+
+void	rotate_both(t_stack_a *stack_a, t_stack_b *stack_b)
+{
+	int	last_num_a;
+	int	last_num_b;
+	int	i;
+
+	last_num_a = stack_b->num_arr[stack_b->top];
+	i = stack_b->top + 1;
+	while (i-- > 0)
+		stack_b->num_arr[i] = stack_b->num_arr[i - 1];
+	stack_b->num_arr[0] = last_num_a;
+	
+
+	last_num_b = stack_a->num_arr[stack_a->top];
+	i = stack_a->top + 1;
+	while (i-- > 0)
+		stack_a->num_arr[i] = stack_a->num_arr[i - 1];
+	stack_a->num_arr[0] = last_num_b;
+	ft_printf("rr\n");
 }
 
 void	reverse_rotate_a(t_stack_a *stack_a)
@@ -128,18 +168,7 @@ void	reverse_rotate_a(t_stack_a *stack_a)
 		i++;
 	}
 	stack_a->num_arr[stack_a->top] = first_num;
-}
-
-void	rotate_b(t_stack_b *stack_b)
-{
-	int	last_num;
-	int	i;
-
-	last_num = stack_b->num_arr[stack_b->top];
-	i = stack_b->top + 1;
-	while (i-- > 0)
-		stack_b->num_arr[i] = stack_b->num_arr[i - 1];
-	stack_b->num_arr[0] = last_num;
+	ft_printf("rra\n");
 }
 
 void	reverse_rotate_b(t_stack_b *stack_b)
@@ -155,6 +184,31 @@ void	reverse_rotate_b(t_stack_b *stack_b)
 		i++;
 	}
 	stack_b->num_arr[stack_b->top] = first_num;
+	ft_printf("rrb\n");
 }
 
-int	is_sorted(t_stack_a stack_a)
+void	reverse_rotate_both(t_stack_a *stack_a, t_stack_b *stack_b)
+{
+	int	first_num_a;
+	int	first_num_b;
+	int	i;
+
+	first_num_a = stack_a->num_arr[0];
+	i = 0;
+	while (i < stack_a->top)
+	{
+		stack_a->num_arr[i] = stack_a->num_arr[i + 1];
+		i++;
+	}
+	stack_a->num_arr[stack_a->top] = first_num_a;
+
+	first_num_b = stack_b->num_arr[0];
+	i = 0;
+	while (i < stack_b->top)
+	{
+		stack_b->num_arr[i] = stack_b->num_arr[i + 1];
+		i++;
+	}
+	stack_b->num_arr[stack_b->top] = first_num_b;
+	ft_printf("rrr\n");
+}

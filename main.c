@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 11:40:14 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/11/28 12:38:03 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/14 15:13:55 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,21 +79,22 @@ int	main(int c, char **args)
 {
 	int i = 0;
 
-	if (check_args(c, args) == 0)
-	{
-		printf("walla walo hhhh");
-		exit(0);
-	}
+	// if (check_args(c, args) == 0)
+	// {
+	// 	printf("walla walo hhhh");
+	// 	exit(0);
+	// }
 	t_stack_a *stack_a = cr_stack_a(c - 1);
 	t_stack_b *stack_b = cr_stack_b(c - 1);
 	fill_a(stack_a, args, c);
-	swap_a(stack_a);
-	push_b(stack_a, stack_b);
-	push_b(stack_a, stack_b);
-	push_b(stack_a, stack_b);
-	rotate_a(stack_a);
-	push_b(stack_a, stack_b);
-	
+
+	// if (stack_a->top <= 2)
+	// 	sort_3(stack_a, stack_b);
+	// else if (stack_a->top <= 4)
+	// 	sort_5(stack_a, stack_b);
 	print_stacks(stack_a, stack_b);
 	free_stacks(stack_a, stack_b);
 }
+
+//push two numbers to b
+// calculate how many times it takes for every number to put in a good position in b
