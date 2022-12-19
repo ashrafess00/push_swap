@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 12:26:15 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/19 16:30:46 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/19 19:05:32 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,16 @@ typedef struct	s_stack
 {
 	int	top;
 	int	*num_arr;
+	int	which_stack;
 }	t_stack;
-
-void		reverse_rotate_a(t_stack *stack_a);
-void		reverse_rotate_b(t_stack *stack_b);
-void		rotate_a(t_stack *stack_a);
-void		rotate_b(t_stack *stack_b);
+void		initiate_stacks(t_stack *stack_a, t_stack *stack_b, int size);
+void		rotate(t_stack *stack_a);
+void		reverse_rotate(t_stack *stack_a);
 void		push_a(t_stack *stack_a, t_stack *stack_b);
 void		push_b(t_stack *stack_a, t_stack *stack_b);
 void		print_nums_a(t_stack *stack_a);
 void		print_nums_b(t_stack *stack_b);
-void		swap_a(t_stack *stack_a);
-void		swap_b(t_stack *stack_b);
+void		swap(t_stack *stack);
 // void		fill_a(t_stack_a *stack_a, char **args, int c);
 int			fill_a(t_stack *stack_a, char **numbers, int c);
 // void		free_stacks(t_stack *stack_a, t_stack *stack_b);
@@ -46,5 +44,10 @@ void		sort_me(t_stack *stack_a, t_stack *stack_b);
 void		rotate_both(t_stack *stack_a, t_stack *stack_b);
 void		reverse_rotate_both(t_stack *stack_a, t_stack *stack_b);
 char		**get_args(int c, char **args);
-
+void	repeat_ra(t_stack *stack_a, int c);
+void	repeat_rra(t_stack *stack_a, int c);
+void	repeat_rb(t_stack *stack_a, int c);
+void	repeat_rrb(t_stack *stack_b, int c);
+void	repeat_rr(t_stack *stack_a, t_stack *stack_b, int c);
+void	repeat_rrr(t_stack *stack_a, t_stack *stack_b, int c);
 #endif
