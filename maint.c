@@ -1,13 +1,13 @@
 #include "my_header.h"
 
-void	print_stacks(t_stack_a *stack_a, t_stack_b *stack_b)
+void	print_stacks(t_stack stack_a, t_stack stack_b)
 {
 	int	a;
 	int	b;
 	int	bigger;
 	
-	a = stack_a->top;
-	b = stack_b->top;
+	a = stack_a.top;
+	b = stack_b.top;
 	if (a >= b)
 		bigger = a;
 	else
@@ -15,25 +15,25 @@ void	print_stacks(t_stack_a *stack_a, t_stack_b *stack_b)
 	
 	while (bigger >= 0)
 	{
-		if (stack_a->top >= bigger)
-			printf("%d", stack_a->num_arr[bigger]);
+		if (stack_a.top >= bigger)
+			printf("%d", stack_a.num_arr[bigger]);
 		printf("\t\t");
-		if (stack_b->top >= bigger)
-			printf("%d", stack_b->num_arr[bigger]);
+		if (stack_b.top >= bigger)
+			printf("%d", stack_b.num_arr[bigger]);
 		printf("\n");
 		bigger--;
 	}
 	printf("--------\t--------\nstack_a\t\tstack_b\n");
 }
-void	free_stacks(t_stack_a *stack_a, t_stack_b *stack_b)
-{
-	free(stack_a->num_arr);
-	free(stack_b->num_arr);
-	free(stack_a);
-	free(stack_b);
-}
+// void	free_stacks(t_stack_a *stack_a, t_stack_b *stack_b)
+// {
+// 	free(stack_a->num_arr);
+// 	free(stack_b->num_arr);
+// 	free(stack_a);
+// 	free(stack_b);
+// }
 
-int	find_max(t_stack_b *stack_b)
+int	find_max(t_stack *stack_b)
 {
 	int	max;
 	int	s_t;
@@ -54,7 +54,29 @@ int	find_max(t_stack_b *stack_b)
 	}
 	return(max);
 }
-int	find_min(t_stack_b *stack_b)
+
+int	find_max_in_a(t_stack *stack_a)
+{
+	int	max;
+	int	s_t;
+	int	s_tt;
+
+	s_t = stack_a->top;
+	max = stack_a->num_arr[s_t];
+	while (s_t >= 0)
+	{
+		int	s_tt = s_t - 1;
+		while (s_tt >= 0)
+		{
+			if (max < stack_a->num_arr[s_tt])
+				max = stack_a->num_arr[s_tt];
+			s_tt--;
+		}
+		s_t--;
+	}
+	return(max);
+}
+int	find_min(t_stack *stack_b)
 {
 	int	min;
 	int	s_t;
@@ -75,7 +97,28 @@ int	find_min(t_stack_b *stack_b)
 	}
 	return(min);
 }
-static int	i_pos_a(t_stack_a *stack_a, int num)
+int	find_min_in_a(t_stack *stack_a)
+{
+	int	min;
+	int	s_t;
+	int	s_tt;
+
+	s_t = stack_a->top;
+	min = stack_a->num_arr[s_t];
+	while (s_t >= 0)
+	{
+		int	s_tt = s_t - 1;
+		while (s_tt >= 0)
+		{
+			if (min > stack_a->num_arr[s_tt])
+				min = stack_a->num_arr[s_tt];
+			s_tt--;
+		}
+		s_t--;
+	}
+	return(min);
+}
+static int a_pos_in_a(t_stack *stack_a, int num)
 {
 	int	i;
 
@@ -84,7 +127,7 @@ static int	i_pos_a(t_stack_a *stack_a, int num)
 		i--;
 	return (i);
 }
-static int	i_pos_b(t_stack_b *stack_b, int num)
+static int	a_pos_in_b(t_stack *stack_b, int num)
 {
 	int	s_t;
 	int	max;
@@ -100,7 +143,6 @@ static int	i_pos_b(t_stack_b *stack_b, int num)
 			s_t--;
 		return (s_t + 1);
 	}
-	s_t = stack_b->top;
 	if (stack_b->num_arr[0] > num && stack_b->num_arr[s_t] < num)
 		return (s_t + 1);
 	while (s_t > 0)
@@ -112,8 +154,34 @@ static int	i_pos_b(t_stack_b *stack_b, int num)
 	return (s_t);
 }
 
+int	b_pos_in_a(t_stack *stack_a, int num)
+{
+	int	s_t;
+	int	max;
+	int	min;
 
-int  count_rotations(t_stack_a *stack_a, t_stack_b *stack_b, int num)
+	max = find_max_in_a(stack_a);
+	min = find_min_in_a(stack_a);
+	s_t = stack_a->top;
+	if (num > max || num < min)
+	{
+		num = min;
+		while (stack_a->num_arr[s_t] != num && s_t > -1)
+			s_t--;
+		return (s_t + 1);
+	}
+	if (stack_a->num_arr[0] < num && stack_a->num_arr[s_t] > num)
+		return (s_t + 1);
+	while (s_t > 0)
+	{
+		if (stack_a->num_arr[s_t] <= num && stack_a->num_arr[s_t - 1] >= num)
+			return (s_t);
+		s_t--;
+	}
+	return (s_t);
+}
+
+int  count_rotations(t_stack *stack_a, t_stack *stack_b, int num)
 {
 	int	ra = -1;
 	int	rb = -1;
@@ -121,11 +189,12 @@ int  count_rotations(t_stack_a *stack_a, t_stack_b *stack_b, int num)
 	int	rrb = -1;
 	int	i;
 	int	count = 0;
+	int	instructions;
 
-	i = i_pos_a(stack_a, num);
+	i = a_pos_in_a(stack_a, num);
 	ra = stack_a->top - i;
 	rra = i + 1;
-	i = i_pos_b(stack_b, num);
+	i = a_pos_in_b(stack_b, num);
 	rb = stack_b->top - i + 1;
 	rrb = i;
 	if (ra <= rra && rb <= rrb)
@@ -146,17 +215,10 @@ int  count_rotations(t_stack_a *stack_a, t_stack_b *stack_b, int num)
 		count = rra + rb;
 	else if (ra <= rra && rb >= rrb)
 		count = ra + rrb;
-	// ra rra rb rrb rr rrr
-	// printf("count rotaions:\n");
-	// printf("ra : %d\n", ra);
-	// printf("rra : %d\n", rra);
-	// printf("rb : %d\n", rb);
-	// printf("rrb : %d\n", rrb);
-	// printf("count : %d\n", count);
 	return(count + 1);
 }
 
-int	cheaper_num_i(t_stack_a *stack_a, t_stack_b *stack_b)
+int	cheaper_num_i(t_stack *stack_a, t_stack *stack_b)
 {
 	int	s_t;
 	int	c;
@@ -180,7 +242,7 @@ int	cheaper_num_i(t_stack_a *stack_a, t_stack_b *stack_b)
 	return (index);
 }
 
-void	rotate_me(t_stack_a *stack_a, t_stack_b *stack_b, int ra, int rra, int rb, int rrb, int rr, int rrr)
+void	push_me_to_b(t_stack *stack_a, t_stack *stack_b, int ra, int rra, int rb, int rrb, int rr, int rrr)
 {
 	while (ra-- > 0)
 		rotate_a(stack_a);
@@ -197,151 +259,191 @@ void	rotate_me(t_stack_a *stack_a, t_stack_b *stack_b, int ra, int rra, int rb, 
 	push_b(stack_a, stack_b);
 }
 
-void	instractions(t_stack_a *stack_a, t_stack_b *stack_b, int num)
+void	fill_instructions(int instructions[6], int i1, int i2)
 {
-	int	ra = -1;
-	int	rb = -1;
-	int	rra = -1;
-	int	rrb = -1;
-	int	rr = -1;
-	int	rrr = -1;
-	int index;
-
-	index = i_pos_a(stack_a, num);
-	ra = stack_a->top - index;
-	rra = index + 1;
-	index = i_pos_b(stack_b, num);
-	rb = stack_b->top - index + 1;
-	rrb = index;
-	// printf("ra ->%d\n", ra);
-	// printf("rra ->%d\n", rra);
-	// printf("rb ->%d\n", rb);
-	// printf("rrb ->%d\n", rrb);
-
-	if (ra <= rra && rb <= rrb)
+	int	i;
+	
+	i = 0;
+	while (i < 6)
 	{
-		// printf("hi");
-		if (ra >= rb)
-		{
-			rr = rb;
-			ra = ra - rb;
-
-			rb = -1;
-			rra = -1;
-			rrb = -1;
-			rrr = -1;
-		}
-		else
-		{
-			rr = ra;
-			rb = rb - ra;
-
-			ra = -1;
-			rra = -1;
-			rrb = -1;
-			rrr = -1;
-		}
+		if (i != i1 && i != i2)
+			instructions[i] = -1;
+		i++;
 	}
-	else if (rra <= ra && rrb <= rb)
-	{
-		if (rra >= rrb)
-		{
-			rrr = rrb;
-			rra = rra - rrb;
+}
 
-			ra = -1;
-			rb = -1;
-			rrb = -1;
-			rr = -1;
-		}
-		else
-		{
-			rrr = rra;
-			rrb = rrb - rra;
+void	rotate_me_push_a(t_stack *stack_a, t_stack *stack_b, int ra, int rra)
+{
+	while (ra-- > 0)
+		rotate_a(stack_a);
+	while (rra-- > 0)
+		reverse_rotate_a(stack_a);
+	push_a(stack_a, stack_b);
+}
+void	push_all_2_a(t_stack *stack_a, t_stack *stack_b, int num)
+{
+	int	i;
+	int	ra;
+	int	rra;
 
-			ra = -1;
-			rb = -1;
-			rra = -1;
-			rr = -1;
-		}
-	}
-	else if (ra <= rra && rb >= rrb)
-	{
-		rb = -1;
-		rra = -1;
-		rr = -1;
-		rrr = -1;
-	}
-	else if (ra >= rra && rb <= rrb)
-	{
+	i = b_pos_in_a(stack_a, num);
+	ra = stack_a->top - i + 1;
+	rra = i;
+	if (ra >= rra)
 		ra = -1;
-		rrb = -1;
-		rr = -1;
-		rrr = -1;
+	else
+		rra = -1;
+	rotate_me_push_a(stack_a, stack_b, ra, rra);
+}
+void	push_all_2_b(t_stack *stack_a, t_stack *stack_b, int num)
+{
+	int index;
+	int	instructions[6];
+
+	fill_instructions(instructions, -1, -1);
+	index = a_pos_in_a(stack_a, num);
+	instructions[0] = stack_a->top - index;
+	instructions[2] = index + 1;
+	index = a_pos_in_b(stack_b, num);
+	instructions[1] = stack_b->top - index + 1;
+	instructions[3] = index;
+	if (instructions[0] <= instructions[2] && instructions[1] <= instructions[3])
+	{
+		if (instructions[0] >= instructions[1])
+		{
+			instructions[4] = instructions[1];
+			instructions[0] = instructions[0] - instructions[1];
+			fill_instructions(instructions, 0, 4);
+		}
+		else
+		{
+			instructions[4] = instructions[0];
+			instructions[1] = instructions[1] - instructions[0];
+			fill_instructions(instructions, 1, 4);
+		}
 	}
-	// printf("\nra %d - rra %d - rb %d - rrb %d - rr %d - rrr %d\n", ra, rra, rb, rrb, rr, rrr);
-	rotate_me (stack_a, stack_b, ra, rra, rb, rrb, rr, rrr);
+	else if (instructions[2] <= instructions[0] && instructions[3] <= instructions[1])
+	{
+		if (instructions[2] >= instructions[3])
+		{
+			instructions[5] = instructions[3];
+			instructions[2] = instructions[2] - instructions[3];
+			fill_instructions(instructions, 2, 5);
+		}
+		else
+		{
+			instructions[5] = instructions[2];
+			instructions[3] = instructions[3] - instructions[2];
+			fill_instructions(instructions, 3, 5);
+		}
+	}
+	else if (instructions[0] <= instructions[2] && instructions[1] >= instructions[3])
+		fill_instructions(instructions, 0, 3);
+	else if (instructions[0] >= instructions[2] && instructions[1] <= instructions[3])
+		fill_instructions(instructions, 1, 2);
+	push_me_to_b (stack_a, stack_b, instructions[0], instructions[2], instructions[1], instructions[3], instructions[4], instructions[5]);
+}
+void	adapt(t_stack *stack_a)
+{
+	int	min;
+	int	i;
+	int	ra;
+	int	rra;
+
+	min = find_min_in_a(stack_a);
+	i = b_pos_in_a(stack_a, min);
+	ra = stack_a->top - i;
+	rra = i + 1;
+	if (ra < rra)
+		rra = -1;
+	else
+		ra = -1;
+	while (ra-- > 0)
+		rotate_a(stack_a);
+	while (rra-- > 0)
+		reverse_rotate_a(stack_a);
+}
+
+int	is_a_sorted(t_stack stack_a)
+{
+	int	s_t;
+	int	s_t2;
+
+	s_t = stack_a.top;
+	while (s_t >= 0)
+	{
+		s_t2 = s_t - 1;
+		while (s_t2 >= 0)
+		{
+			if (stack_a.num_arr[s_t] > stack_a.num_arr[s_t2])
+				return (0);
+			s_t2--;
+		}
+		s_t--;
+	}
+	return (1);
+}
+
+int	count_numbers(char **s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
 
 int main(int c, char **args)
 {
-
+	char	**numbers;
 	int i = 0;
-	t_stack_a *stack_a = cr_stack_a(c - 1);
-	t_stack_b *stack_b = cr_stack_b(c - 1);
-	fill_a(stack_a, args, c);
-	push_b(stack_a, stack_b);
-	push_b(stack_a, stack_b);
-	// push_b(stack_a, stack_b);
-	// push_b(stack_a, stack_b);
-	// int j = count_rotations(stack_a, stack_b, 17);
-	// printf("(%d)\n", j);
-	int s_t = stack_a->top;
-	// printf("ins[0] %d :\n", ins[0]);
-	// printf("ins[1] %d :\n", ins[1]);
-	// printf("ins[2] %d :\n", ins[2]);
-	// printf("ins[3] %d :\n", ins[3]);
-	// printf("ins[4] %d :\n", ins[4]);
-	// printf("ins[5] %d :\n", ins[5]);
-	print_stacks(stack_a, stack_b);
+	int	numbers_count;
+	t_stack	stack_a;
+	t_stack stack_b;
+	
+	
+	stack_a.top = -1;
+	stack_b.top = -1;
+	numbers = get_args(c, args);
+	if (!numbers)
+	{
+		printf("error");
+		exit(0);
+	}
+	
+	numbers_count = count_numbers(numbers);
+	stack_a.num_arr = malloc(numbers_count  * sizeof(int));
+	stack_b.num_arr = malloc(numbers_count * sizeof(int));
+	if(!fill_a(&stack_a, numbers, numbers_count))
+	{
+		printf("error");
+		exit(0);
+	}
+	
+	if (is_a_sorted(stack_a))
+	{
+		printf("a is sorted");
+		exit(0);
+	}
+	if (stack_a.top == 2)
+		sort_3(&stack_a);
+	push_b(&stack_a, &stack_b);
+	push_b(&stack_a, &stack_b);
+	int s_t = stack_a.top;
 	while (s_t >= 3)
 	{
-		// printf("number %d needs %d moves to be in stack b -> ", stack_a->num_arr[s_t], count_rotations(stack_a, stack_b, stack_a->num_arr[s_t]));
-		// printf("\n");
-		// s_t--;
-		int cheaper = cheaper_num_i(stack_a, stack_b);
-		// printf("cheaper num : (%d)\n", stack_a->num_arr[cheaper]);
-		instractions(stack_a, stack_b, stack_a->num_arr[cheaper]);
-		// print_stacks(stack_a, stack_b);
-		// printf("\n----------------------------------------------------\n");
-
+		int cheaper = cheaper_num_i(&stack_a, &stack_b);
+		push_all_2_b(&stack_a, &stack_b, stack_a.num_arr[cheaper]);
 		s_t--;
-		// stack_a->top -= 1;
 	}
-	// instractions(stack_a, stack_b, 5);
-	// printf("(%d)", count_rotations(stack_a, stack_b, 3));
-	// instractions(stack_a, stack_b, 6);
-	// instractions(stack_a, stack_b, 15);
-	// instractions(stack_a, stack_b, 13);
-	// instractions(stack_a, stack_b, 12);
-	// instractions(stack_a, stack_b, 7);
-	// instractions(stack_a, stack_b, 11);
-	// instractions(stack_a, stack_b, 14);
-	// instractions(stack_a, stack_b, 2);
-	// instractions(stack_a, stack_b, 3);
-	// instractions(stack_a, stack_b, 5);
-
-	// printf("(%d)", count_rotations(stack_a, stack_b, 9));
-	// instractions(stack_a, stack_b, 9);
-
-	// instractions(stack_a, stack_b, 8);
-
-	// print_stacks(stack_a, stack_b);
-	// print_stacks(stack_a, stack_b);
-
-	free_stacks(stack_a, stack_b);
+	sort_3(&stack_a);
+	int	s_t_b = stack_b.top;
+	while (s_t_b > -1)
+	{
+		push_all_2_a(&stack_a, &stack_b, stack_b.num_arr[s_t_b]);
+		s_t_b--;
+	}
+	adapt(&stack_a);
+	print_stacks(stack_a, stack_b);
 }
-
-/*
-	*after we got the number with minimum instructions index, it's time to get 
-*/

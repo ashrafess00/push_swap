@@ -6,13 +6,13 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 20:02:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/12 12:57:01 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/19 14:11:26 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_header.h"
 
-void	sort_3(t_stack_a *stack_a, t_stack_b *stack_b)
+void	sort_3(t_stack *stack_a)
 {
 	int top_a;
 	int top_b;
