@@ -181,40 +181,29 @@ int	b_pos_in_a(t_stack *stack_a, int num)
 	return (s_t);
 }
 
+int	ft_max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
 int  count_rotations(t_stack *stack_a, t_stack *stack_b, int num)
 {
-	int	ra = -1;
-	int	rb = -1;
-	int	rra = -1;
-	int	rrb = -1;
-	int	i;
+	int	ia;
+	int	ib;
 	int	count = 0;
-	int	instructions;
 
-	i = a_pos_in_a(stack_a, num);
-	ra = stack_a->top - i;
-	rra = i + 1;
-	i = a_pos_in_b(stack_b, num);
-	rb = stack_b->top - i + 1;
-	rrb = i;
-	if (ra <= rra && rb <= rrb)
-	{
-		if (ra > rb)
-			count = ra;
-		else
-			count = rb;
-	}
-	else if (rra <= ra && rrb <= rb)
-	{
-		if (rra > rrb)
-			count = rra;
-		else
-			count = rrb;
-	}
-	else if (ra >= rra && rb <= rrb)
-		count = rra + rb;
-	else if (ra <= rra && rb >= rrb)
-		count = ra + rrb;
+	ia = a_pos_in_a(stack_a, num);
+	ib = a_pos_in_b(stack_b, num);
+	if (ia >= (stack_a->top / 2) && ib >= (stack_b->top / 2))
+		count = ft_max(stack_a->top - ia, stack_b->top - ib + 1);
+	else if (ia <= (stack_a->top / 2) && ib <= (stack_b->top / 2))
+		count = ft_max(ia + 1, ib);
+	else if (ia <= (stack_a->top / 2) && ib >= (stack_b->top / 2))
+		count = ia + 1 + stack_b->top - ib + 1;
+
+	else if (ia >= (stack_a->top / 2) && ib <= (stack_b->top / 2))
+		count = stack_a->top - ia + ib;
 	return(count + 1);
 }
 
@@ -245,13 +234,13 @@ int	cheaper_num_i(t_stack *stack_a, t_stack *stack_b)
 void	push_me_to_b(t_stack *stack_a, t_stack *stack_b, int ra, int rra, int rb, int rrb, int rr, int rrr)
 {
 	while (ra-- > 0)
-		rotate_a(stack_a);
+		rotate(stack_a);
 	while (rra-- > 0)
-		reverse_rotate_a(stack_a);
+		reverse_rotate(stack_a);
 	while (rb-- > 0)
-		rotate_b(stack_b);
+		rotate(stack_b);
 	while (rrb-- > 0)
-		reverse_rotate_b(stack_b);
+		reverse_rotate(stack_b);
 	while (rr-- > 0)
 		rotate_both(stack_a, stack_b);
 	while (rrr-- > 0)
@@ -275,9 +264,9 @@ void	fill_instructions(int instructions[6], int i1, int i2)
 void	rotate_me_push_a(t_stack *stack_a, t_stack *stack_b, int ra, int rra)
 {
 	while (ra-- > 0)
-		rotate_a(stack_a);
+		rotate(stack_a);
 	while (rra-- > 0)
-		reverse_rotate_a(stack_a);
+		reverse_rotate(stack_a);
 	push_a(stack_a, stack_b);
 }
 void	push_all_2_a(t_stack *stack_a, t_stack *stack_b, int num)
@@ -359,9 +348,9 @@ void	adapt(t_stack *stack_a)
 	else
 		ra = -1;
 	while (ra-- > 0)
-		rotate_a(stack_a);
+		rotate(stack_a);
 	while (rra-- > 0)
-		reverse_rotate_a(stack_a);
+		reverse_rotate(stack_a);
 }
 
 int	is_a_sorted(t_stack stack_a)
@@ -403,8 +392,8 @@ int main(int c, char **args)
 	t_stack stack_b;
 	
 	
-	stack_a.top = -1;
-	stack_b.top = -1;
+	// stack_a.top = -1;
+	// stack_b.top = -1;
 	numbers = get_args(c, args);
 	if (!numbers)
 	{
@@ -413,8 +402,9 @@ int main(int c, char **args)
 	}
 	
 	numbers_count = count_numbers(numbers);
-	stack_a.num_arr = malloc(numbers_count  * sizeof(int));
-	stack_b.num_arr = malloc(numbers_count * sizeof(int));
+	// stack_a.num_arr = malloc(numbers_count  * sizeof(int));
+	// stack_b.num_arr = malloc(numbers_count * sizeof(int));
+	initiate_stacks(&stack_a, &stack_b, numbers_count);
 	if(!fill_a(&stack_a, numbers, numbers_count))
 	{
 		printf("error");
@@ -428,7 +418,9 @@ int main(int c, char **args)
 	}
 	if (stack_a.top == 2)
 		sort_3(&stack_a);
-	push_b(&stack_a, &stack_b);
+	else
+	{
+		push_b(&stack_a, &stack_b);
 	push_b(&stack_a, &stack_b);
 	int s_t = stack_a.top;
 	while (s_t >= 3)
@@ -445,5 +437,5 @@ int main(int c, char **args)
 		s_t_b--;
 	}
 	adapt(&stack_a);
-	print_stacks(stack_a, stack_b);
+	}
 }
