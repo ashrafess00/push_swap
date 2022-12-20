@@ -9,10 +9,8 @@ AR=ar -rc
 # 	$(CC) $(CFLAGS) -c ^$
 
 all:
-	gcc main.c actions1.c ./libft/*.c ./ft_printf/*.c sort_3.c && ./a.out 1 4 3 8 -2 7 3 10 11 6
+	gcc main.c actions1.c ./check_args.c ./libft/*.c ./ft_printf/*.c sort_3.c intiate_stacks.c repeat_instructions.c -o push_swap && ./push_swap 5 7 3 4 -7
 
-test:
-	gcc maint.c actions1.c ./check_args.c ./libft/*.c ./ft_printf/*.c sort_3.c intiate_stacks.c repeat_instructions.c -o push_swap && ./push_swap 5 7 3 4 -7
 com:
 	gcc main.c $(SRCS)
 
