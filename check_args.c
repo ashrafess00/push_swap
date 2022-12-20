@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:26:22 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/19 14:57:49 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/20 17:09:20 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,66 @@ int	is_duplicated(char **nums)
 	return (0);
 }
 
+static int	is_min(char	*number)
+{
+	char	*min;
+	int		i;
+
+	min = "-2147483648";
+	i = 0;
+	while (number[++i])
+	{
+		if (number[i] > min[i])
+			return (1);
+		if (number[i] < min[i])
+			return (0);
+	}
+	return (0);
+}
+
+static int	is_max(char	*number)
+{
+	char	*max;
+	int		i;
+
+	max = "2147483647";
+	i = -1;
+	while (number[++i])
+	{
+		if (number[i] > max[i])
+			return (1);
+		if (number[i] < max[i])
+			return (0);
+	}
+	return (0);
+}
+
+
+static int	is_big(char **numbers)
+{
+	int	i;
+	int	num_count;
+	int		j;
+	
+	i = -1;
+	while (numbers[++i])
+	{
+		num_count = ft_strlen(numbers[i]);
+		if (num_count > 11 || (num_count == 11 && numbers[i][0] != '-'))
+			return (1);
+		else if (num_count == 11 && numbers[i][0] == '-')
+		{	
+			if (is_min(numbers[i]))
+				return (1);
+		}
+		else if (num_count == 10)
+		{
+			if (is_max(numbers[i]))
+				return (1);
+		}
+	}
+	return (0);
+}
 char	**get_args(int c, char **args)
 {
 	char	*numbers_string;
@@ -83,24 +143,8 @@ char	**get_args(int c, char **args)
 		numbers = ft_split(numbers_string, ' ');
 		if (is_duplicated(numbers))
 			return (0);
+		if (is_big(numbers))
+			return (0);
 	}
 	return (numbers);
 }
-
-// int main(int c, char **args)
-// {
-// 	char	**s;
-
-// 	s = get_args(c, args);
-// 	if(!s)
-// 	{
-// 		printf("Error");
-// 		exit(0);
-// 	}
-// 	int i = -1;
-// 	while (s[++i])
-// 	{
-// 		printf("%s\n", s[i]);
-// 	}
-// 	printf("--%d--\n", ft_atoi(s[0]));
-// }

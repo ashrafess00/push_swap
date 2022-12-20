@@ -187,6 +187,7 @@ int	ft_max(int a, int b)
 		return (a);
 	return (b);
 }
+
 int  count_rotations(t_stack *stack_a, t_stack *stack_b, int num)
 {
 	int	ia;
@@ -206,7 +207,7 @@ int  count_rotations(t_stack *stack_a, t_stack *stack_b, int num)
 	return(count + 1);
 }
 
-int	cheaper_num_i(t_stack *stack_a, t_stack *stack_b)
+int	cheaper_num(t_stack *stack_a, t_stack *stack_b)
 {
 	int	s_t;
 	int	c;
@@ -227,41 +228,9 @@ int	cheaper_num_i(t_stack *stack_a, t_stack *stack_b)
 		}
 		s_t--;
 	}
-	return (index);
+	return (stack_a->num_arr[index]);
 }
 
-void	push_me_to_b(t_stack *stack_a, t_stack *stack_b, int ra, int rra, int rb, int rrb, int rr, int rrr)
-{
-	repeat_ra(stack_a, ra);
-	repeat_rra(stack_a, rra);
-	repeat_rb(stack_b, rb);
-	repeat_rrb(stack_b, rrb);
-	repeat_rr(stack_a, stack_b, rr);
-	repeat_rrr(stack_a, stack_b, rrr);
-	push_b(stack_a, stack_b);
-}
-
-void	fill_instructions(int instructions[6], int i1, int i2)
-{
-	int	i;
-	
-	i = 0;
-	while (i < 6)
-	{
-		if (i != i1 && i != i2)
-			instructions[i] = -1;
-		i++;
-	}
-}
-
-void	rotate_me_push_a(t_stack *stack_a, t_stack *stack_b, int ra, int rra)
-{
-	while (ra-- > 0)
-		rotate(stack_a);
-	while (rra-- > 0)
-		reverse_rotate(stack_a);
-	push_a(stack_a, stack_b);
-}
 void	push_all_2_a(t_stack *stack_a, t_stack *stack_b, int num)
 {
 	int	i;
@@ -275,57 +244,89 @@ void	push_all_2_a(t_stack *stack_a, t_stack *stack_b, int num)
 		ra = -1;
 	else
 		rra = -1;
-	rotate_me_push_a(stack_a, stack_b, ra, rra);
+	while (ra-- > 0)
+		rotate(stack_a);
+	while (rra-- > 0)
+		reverse_rotate(stack_a);
+	push_a(stack_a, stack_b);
 }
-	// index = a_pos_in_a(stack_a, num);
-	// instructions[0] = stack_a->top - ia; ra
-	// instructions[2] = ia + 1; rra
-	// index = a_pos_in_b(stack_b, num);
-	// instructions[1] = stack_b->top - ib + 1; rb
-	// instructions[3] = ib; rrb
+
+void	rotate_with_rr(t_stack *stack_a, t_stack *stack_b, int ia, int ib)
+{
+	int	ra;
+	int rb;
+	
+	ra = stack_a->top - ia;
+	rb = stack_b->top - ib + 1;
+	if (ra <= rb)
+	{
+		repeat_rr(stack_a, stack_b, ra);
+		repeat_rb(stack_b, rb - ra);
+	}
+	else
+	{
+		repeat_rr(stack_a, stack_b, rb);
+		repeat_ra(stack_a, ra - rb);
+	}
+}
+
+void	rotate_with_rrr(t_stack *stack_a, t_stack *stack_b, int ia, int ib)
+{
+	int	rra;
+	int rrb;
+	
+	rra = ia + 1;
+	rrb = ib;
+	if (rra <= rrb)
+	{
+		repeat_rrr(stack_a, stack_b, rra);
+		repeat_rrb(stack_b, rrb - rra);
+	}
+	else
+	{
+		repeat_rrr(stack_a, stack_b, rrb);
+		repeat_rra(stack_a, rra - rrb);
+	}
+}
+
+void	rotate_with_ra_rrb(t_stack *stack_a, t_stack *stack_b, int ia, int ib)
+{
+	int ra;
+	int	rrb;
+
+	ra = stack_a->top - ia;
+	rrb = ib;
+	repeat_ra(stack_a, ra);
+	repeat_rrb(stack_b, rrb);
+}
+
+void	rotate_with_rra_rb(t_stack *stack_a, t_stack *stack_b, int ia, int ib)
+{
+	int rra;
+	int	rb;
+
+	rra = ia + 1;
+	rb = stack_b->top - ib + 1;
+	repeat_rra(stack_a, rra);
+	repeat_rb(stack_b, rb);
+}
+
 void	push_all_2_b(t_stack *stack_a, t_stack *stack_b, int num)
 {
 	int ia = a_pos_in_a(stack_a, num);
 	int	ib = a_pos_in_b(stack_b, num);
-	
+
 	if (ia >= (stack_a->top / 2) && ib >= (stack_b->top / 2))
-	{
-		if ((stack_a->top - ia) <= (stack_b->top - ib + 1))
-		{
-			repeat_rr(stack_a, stack_b, stack_a->top - ia);
-			repeat_rb(stack_b, (stack_b->top - ib + 1) - (stack_a->top - ia));
-		}
-		else
-		{
-			repeat_rr(stack_a, stack_b, stack_b->top - ib + 1);
-			repeat_ra(stack_a, (stack_a->top - ia) - (stack_b->top - ib + 1));
-		}
-	}
+		rotate_with_rr(stack_a, stack_b, ia, ib);
 	else if (ia <= (stack_a->top / 2) && ib <= (stack_b->top / 2))
-	{
-		if ((ia + 1) <= ib)
-		{
-			repeat_rrr(stack_a, stack_b, ia + 1);
-			repeat_rrb(stack_b, ib - (ia + 1));
-		}
-		else
-		{
-			repeat_rrr(stack_a, stack_b, ib);
-			repeat_rra(stack_a, (ia + 1) - ib);
-		}
-	}
+		rotate_with_rrr(stack_a, stack_b, ia, ib);
 	else if (ia >= (stack_a->top / 2) && ib <= (stack_b->top / 2))
-	{
-		repeat_ra(stack_a, stack_a->top - ia);
-		repeat_rrb(stack_b, ib);
-	}
+		rotate_with_ra_rrb(stack_a, stack_b, ia, ib);
 	else if (ia <= (stack_a->top / 2) && ib >= (stack_b->top / 2))
-	{
-		repeat_rra(stack_a, ia + 1);
-		repeat_rb(stack_b, stack_b->top - ib + 1);
-	}
+		rotate_with_rra_rb(stack_a, stack_b, ia, ib);
 	push_b(stack_a, stack_b);
 }
+
 void	adapt(t_stack *stack_a)
 {
 	int	min;
@@ -384,10 +385,8 @@ int main(int c, char **args)
 	int	numbers_count;
 	t_stack	stack_a;
 	t_stack stack_b;
-	
-	
-	// stack_a.top = -1;
-	// stack_b.top = -1;
+	int	cheaper;
+	// return (0);
 	numbers = get_args(c, args);
 	if (!numbers)
 	{
@@ -396,15 +395,13 @@ int main(int c, char **args)
 	}
 	
 	numbers_count = count_numbers(numbers);
-	// stack_a.num_arr = malloc(numbers_count  * sizeof(int));
-	// stack_b.num_arr = malloc(numbers_count * sizeof(int));
 	initiate_stacks(&stack_a, &stack_b, numbers_count);
 	if(!fill_a(&stack_a, numbers, numbers_count))
 	{
 		printf("error");
 		exit(0);
 	}
-	
+
 	if (is_a_sorted(stack_a))
 	{
 		printf("a is sorted");
@@ -419,8 +416,8 @@ int main(int c, char **args)
 	int s_t = stack_a.top;
 	while (s_t >= 3)
 	{
-		int cheaper = cheaper_num_i(&stack_a, &stack_b);
-		push_all_2_b(&stack_a, &stack_b, stack_a.num_arr[cheaper]);
+		cheaper = cheaper_num(&stack_a, &stack_b);
+		push_all_2_b(&stack_a, &stack_b, cheaper);
 		s_t--;
 	}
 	sort_3(&stack_a);

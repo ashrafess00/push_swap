@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 12:26:15 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/19 19:05:32 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/20 16:24:37 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,8 @@ void		push_b(t_stack *stack_a, t_stack *stack_b);
 void		print_nums_a(t_stack *stack_a);
 void		print_nums_b(t_stack *stack_b);
 void		swap(t_stack *stack);
-// void		fill_a(t_stack_a *stack_a, char **args, int c);
 int			fill_a(t_stack *stack_a, char **numbers, int c);
-// void		free_stacks(t_stack *stack_a, t_stack *stack_b);
 char		**get_args(int c, char **args);
-// t_stack_a	*cr_stack_a(int size);
-// t_stack_b	*cr_stack_b(int size);
 void		sort_3(t_stack *stack_a);
 void		sort_me(t_stack *stack_a, t_stack *stack_b);
 void		rotate_both(t_stack *stack_a, t_stack *stack_b);

@@ -1,5 +1,10 @@
 {
     "files.associations": {
-        "my_header.h": "c"
+        "my_header.h": "c",
+        "algorithm": "c",
+        "chrono": "c",
+        "limits": "c",
+        "random": "c",
+        "ratio": "c"
     }
 }
