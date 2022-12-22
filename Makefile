@@ -1,19 +1,45 @@
-CC=gcc
-CFLAGS=-Wall -Wextra -Werror
-SRCS=./ft_printf/*.c ./libft/*.c actions1.c check_args.c
-OBJS=${SRCS:.c=.o}
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/12/22 16:27:55 by aessaoud          #+#    #+#              #
+#    Updated: 2022/12/22 19:35:24 by aessaoud         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME=push_swap
-AR=ar -rc
 
-# all:$(SRCS)
-# 	$(CC) $(CFLAGS) -c ^$
+LIBFT_DIR=libft/
+LIBFT_A=$(LIBFT_DIR)libft.a
+OBJS_DIR=objs/
+SRCS_DIR=srcs/
+SRCS_LIST=main.c check_args.c instructions.c print_stacks.c sort_3.c repeat_instructions.c sort_big.c rotate_with.c find_pos.c push_all_to_a_b.c
+SRCS=$(addprefix $(SRCS_DIR), $(SRCS_LIST))
 
-all:
-	gcc main.c instructions.c ./check_args.c ./libft/*.c ./ft_printf/*.c sort_3.c intiate_stacks.c repeat_instructions.c -o push_swap && ./push_swap -15231 40069 -5395 34175 32627 -37476 26798 15743 31956 -38200 -40238 -30855 44242 -54646 -56457 3996 -41838 1304 11246 11220 -54197 -51428 46555 -56023 49673 -43505 17312 4688 24290 -16973 17889 -35612 50362 16774 -47235 -46145 -16617 -6813 -14894 3952 -38281 26815 -21164 38896 4985 -11047 -4129 44586 -34042 -37393 -55812 -6002 -54932 -21461 -673 -44999 -13392 50806 18105 -19431 49551 19099 31010 -22873 44601 10223 -21260 -30767 -17424 17322 17857 11845 -52075 31157 35224 21670 -16939 -49571 44212 -6522 -13964 35914 45382 13188 24550 -1180 25121 -22159 -20810 46962 -36945 -22410 -52846 -5419 35369 -47355 -43314 6204 34391 -28466
+OBJ_LIST=$(SRCS_LIST:.c=.o)
+OBJS=$(addprefix $(OBJS_DIR), $(OBJ_LIST))
 
-com:
-	gcc main.c $(SRCS)
+all:$(OBJS_DIR) $(NAME)
 
-# all:
-# 	$(CC) $(CFLAGS) main.c $(SRCS) -o $(NAME) && ./$(NAME)
+$(OBJS_DIR):
+	mkdir -p $(OBJS_DIR)
+	
+$(NAME):$(OBJS) $(LIBFT_A)
+	gcc $(OBJS) $(LIBFT_A) -o $(NAME)
 
+$(LIBFT_A):
+	$(MAKE) -C $(LIBFT_DIR)
+	
+$(OBJS_DIR)%.o:$(SRCS_DIR)%.c
+	gcc -c -o  $@ $^
+	
+clean:
+	make clean -C $(LIBFT_DIR)
+	rm -rf $(OBJS_DIR)
+fclean:
+	make clean
+	rm push_swap
+	

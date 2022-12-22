@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   actions1.c                                         :+:      :+:    :+:   */
+/*   instructions.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 17:51:40 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/19 19:06:56 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/22 19:36:56 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "my_header.h"
+#include "../headers/my_header.h"
 
 void	initiate_stacks(t_stack *stack_a, t_stack *stack_b, int size)
 {

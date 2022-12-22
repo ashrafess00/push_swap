@@ -6,44 +6,35 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 17:39:09 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/19 19:05:52 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/22 19:36:56 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "my_header.h"
+#include "../headers/my_header.h"
 
-void	repeat_ra(t_stack *stack_a, int c)
+void	repeat_pb(t_stack *stack_a, t_stack *stack_b, int c)
 {
 	while (c > 0)
 	{
-		rotate(stack_a);
+		push_b(stack_a, stack_b);
 		c--;
 	}
 }
 
-void	repeat_rb(t_stack *stack_b, int c)
+void	repeat_rotate(t_stack *stack, int c)
 {
 	while (c > 0)
 	{
-		rotate(stack_b);
+		rotate(stack);
 		c--;
 	}
 }
 
-void	repeat_rra(t_stack *stack_a, int c)
+void	repeat_reverse_rotate(t_stack *stack, int c)
 {
 	while (c > 0)
 	{
-		reverse_rotate(stack_a);
-		c--;
-	}
-}
-
-void	repeat_rrb(t_stack *stack_b, int c)
-{
-	while (c > 0)
-	{
-		reverse_rotate(stack_b);
+		reverse_rotate(stack);
 		c--;
 	}
 }
