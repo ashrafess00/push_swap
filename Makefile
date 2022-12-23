@@ -6,7 +6,7 @@
 #    By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/22 16:27:55 by aessaoud          #+#    #+#              #
-#    Updated: 2022/12/23 19:48:35 by aessaoud         ###   ########.fr        #
+#    Updated: 2022/12/23 23:12:10 by aessaoud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ BONUS_OBJS_DIR=bonus_objs/
 SRCS_DIR=srcs/
 BONUS_SRCS_DIR=bonus/
 
-SRCS_LIST=main.c check_args.c instructions1.c instructions2.c print_stacks.c sort_3.c repeat_instructions.c sort_big.c rotate_with.c find_pos.c push_all_to_a_b.c free_stacks.c
-BONUS_SRCS_LIST=main.c check_args_bonus.c instructions1_bonus.c instructions2_bonus.c print_stacks_bonus.c
+SRCS_LIST=main.c check_args.c check_args_2.c instructions1.c instructions2.c print_stacks.c sort_3.c repeat_instructions.c sort_big.c rotate_with.c find_pos.c push_all_to_a_b.c free_stacks.c free_all.c initiate_stacks.c leacks_cheker_ex.c
+BONUS_SRCS_LIST=main.c check_args_bonus.c check_args_2_bonus.c instructions1_bonus.c instructions2_bonus.c print_stacks_bonus.c free_all_bonus.c leacks_cheker_ex.c
 
 
 OBJ_LIST=$(SRCS_LIST:.c=.o)
@@ -33,6 +33,8 @@ OBJS=$(addprefix $(OBJS_DIR), $(OBJ_LIST))
 
 BONUS_OBJ_LIST=$(BONUS_SRCS_LIST:.c=.o)
 BONUS_OBJS=$(addprefix $(BONUS_OBJS_DIR), $(BONUS_OBJ_LIST))
+
+LEAKS_CHECKER=leacks_cheker_ex.c
 
 all:$(OBJS_DIR) $(NAME)
 	
@@ -67,10 +69,11 @@ check: all
 clean:
 	make clean -C $(LIBFT_DIR)
 	rm -rf $(OBJS_DIR)
-
-fclean:
-	make fclean -C $(LIBFT_DIR)
-	rm push_swap
 	rm -rf $(BONUS_OBJS_DIR)
+
+fclean:clean
+	rm $(NAME)
 	rm $(BONUS_NAME)
-# .PHONY:checker
+	
+	
+.PHONY:bonus check clean fclean

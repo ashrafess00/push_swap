@@ -6,45 +6,11 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:26:22 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/23 19:48:09 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/23 23:31:27 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_header.h"
-
-static int	is_number(char *s)
-{
-	int	i;
-
-	i = -1;
-	while (s[++i])
-	{
-		if (!ft_isdigit(s[i]) && s[i] != ' '
-			&& !(s[i] == '-' && ft_isdigit(s[i + 1])))
-			return (0);
-	}
-	return (1);
-}
-
-int	is_duplicated(char **nums)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (nums[i])
-	{
-		j = i + 1;
-		while (nums[j])
-		{
-			if (ft_strcmp(nums[i], nums[j]) == 0)
-				return (1);
-			j++;
-		}
-		i++;
-	}
-	return (0);
-}
 
 static int	is_min(char	*number)
 {
@@ -84,7 +50,7 @@ static int	is_big(char **numbers)
 {
 	int	i;
 	int	num_count;
-	int		j;
+	int	j;
 
 	i = -1;
 	while (numbers[++i])
@@ -113,7 +79,7 @@ static int	is_empty(char *arg)
 	i = -1;
 	if (arg[0] == '\0')
 		return (1);
-	while(arg[++i])
+	while (arg[++i])
 	{
 		if (arg[i] != ' ')
 			return (0);
@@ -139,12 +105,11 @@ char	**get_args(int c, char **args)
 			numbers_string = ft_strjoin(numbers_string, ft_strdup(args[i]));
 			i++;
 		}
+		free(numbers_string);
 		if (!is_number(numbers_string))
 			return (0);
 		numbers = ft_split(numbers_string, ' ');
-		if (is_duplicated(numbers))
-			return (0);
-		if (is_big(numbers))
+		if (is_duplicated(numbers) || is_big(numbers))
 			return (0);
 	}
 	return (numbers);

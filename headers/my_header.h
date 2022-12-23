@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 12:26:15 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/23 19:34:16 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/23 23:10:01 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,12 @@ int			b_pos_in_a(t_stack *stack_a, int num);
 void		push_all_2_a(t_stack *stack_a, t_stack *stack_b, int num);
 void		push_all_2_b(t_stack *stack_a, t_stack *stack_b, int num);
 int			find_min(t_stack *stack);
-void		free_stacks(t_stack *stack_a, t_stack *stack_b);
 
 int			count_numbers(char **s);
-int		is_a_sorted(t_stack *stack_a);
+int			is_a_sorted(t_stack *stack_a);
+void		free_all(t_stack *stack_a, t_stack *stack_b, char **numbers);
+void		check_leaks();
+
+int			is_duplicated(char **nums);
+int			is_number(char *s);
 #endif

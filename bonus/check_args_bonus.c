@@ -6,45 +6,11 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:26:22 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/23 19:44:25 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/23 23:11:28 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "my_header.h"
-
-static int	is_number(char *s)
-{
-	int	i;
-
-	i = -1;
-	while (s[++i])
-	{
-		if (!ft_isdigit(s[i]) && s[i] != ' '
-			&& !(s[i] == '-' && ft_isdigit(s[i + 1])))
-			return (0);
-	}
-	return (1);
-}
-
-int	is_duplicated(char **nums)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (nums[i])
-	{
-		j = i + 1;
-		while (nums[j])
-		{
-			if (ft_strcmp(nums[i], nums[j]) == 0)
-				return (1);
-			j++;
-		}
-		i++;
-	}
-	return (0);
-}
+#include "bonus_header.h"
 
 static int	is_min(char	*number)
 {
@@ -139,6 +105,7 @@ char	**get_args(int c, char **args)
 			numbers_string = ft_strjoin(numbers_string, ft_strdup(args[i]));
 			i++;
 		}
+		free(numbers_string);
 		if (!is_number(numbers_string))
 			return (0);
 		numbers = ft_split(numbers_string, ' ');

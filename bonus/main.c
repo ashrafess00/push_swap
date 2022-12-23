@@ -6,11 +6,11 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 13:44:43 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/23 19:47:37 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/23 23:22:57 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "my_header.h"
+#include "bonus_header.h"
 
 int	is_instruction(char *ins)
 {
@@ -44,6 +44,7 @@ char	**read_input(void)
 		}
 	}
 	instructions = ft_split(instructions_string, '\n');
+	free(instructions_string);
 	return (instructions);
 }
 
@@ -52,6 +53,7 @@ void	sort_with_instructions(t_stack *stack_a, t_stack *stack_b, char **instructi
 	int	i;
 
 	i = -1;
+	printf("(%s)\n", instructions[0]);
 	while (instructions[++i])
 	{
 		if (!ft_strcmp(instructions[i], "sa"))
@@ -77,26 +79,6 @@ void	sort_with_instructions(t_stack *stack_a, t_stack *stack_b, char **instructi
 		else if(!ft_strcmp(instructions[i], "rrr"))
 			reverse_rotate_both(stack_a, stack_b);
 	}
-}
-
-int	is_a_sorted(t_stack *stack_a)
-{
-	int	s_t;
-	int	s_t2;
-
-	s_t = stack_a->top;
-	while (s_t >= 0)
-	{
-		s_t2 = s_t - 1;
-		while (s_t2 >= 0)
-		{
-			if (stack_a->num_arr[s_t] > stack_a->num_arr[s_t2])
-				return (0);
-			s_t2--;
-		}
-		s_t--;
-	}
-	return (1);
 }
 
 void	initiate_stacks(t_stack *stack_a, t_stack *stack_b, int size)
@@ -137,7 +119,6 @@ int	count_numbers(char **s)
 	return (i);
 }
 
-
 int main(int c, char **args)
 {
 	char	**instructions;
@@ -147,13 +128,15 @@ int main(int c, char **args)
 	t_stack	stack_b;
 	int		number_count;
 	
+	if (c == 1)
+		exit(0);
 	numbers = get_args(c, args);
-	if (!numbers)
+	instructions = read_input();
+	if (!numbers || !instructions)
 	{
 		write (2, "ERROR", 5);
-		exit(0);
+		exit(1);
 	}
-	instructions = read_input();
 	i = 0;
 	number_count = count_numbers(numbers);
 	initiate_stacks(&stack_a, &stack_b, number_count);
@@ -166,4 +149,6 @@ int main(int c, char **args)
 	else
 		ft_printf("KO\n");
 	print_stacks(stack_a, stack_b);
+	free_all(&stack_a, &stack_b, numbers, instructions);
+	check_leaks();
 }

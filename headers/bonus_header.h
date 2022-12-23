@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 19:12:54 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/23 19:33:43 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/23 23:14:41 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,3 +32,8 @@ void		initiate_stacks(t_stack *stack_a, t_stack *stack_b, int size);
 int			fill_a(t_stack *stack_a, char **numbers, int c);
 char		**get_args(int c, char **args);
 void		print_stacks(t_stack stack_a, t_stack stack_b);
+void		check_leaks();
+void		free_all(t_stack *stack_a, t_stack *stack_b, char **numbers, char **instructions);
+int			is_duplicated(char **nums);
+int			is_number(char *s);
+int			is_a_sorted(t_stack *stack_a);

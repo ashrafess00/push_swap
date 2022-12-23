@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 18:38:14 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/23 19:48:09 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/23 23:36:58 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,13 @@ static void	adapt(t_stack *stack_a)
 		reverse_rotate(stack_a);
 }
 
-static int  count_rotations(t_stack *stack_a, t_stack *stack_b, int num)
+static int	count_rotations(t_stack *stack_a, t_stack *stack_b, int num)
 {
 	int	ia;
 	int	ib;
-	int	count = 0;
+	int	count;
 
+	count = 0;
 	ia = a_pos_in_a(stack_a, num);
 	ib = a_pos_in_b(stack_b, num);
 	if (ia >= (stack_a->top / 2) && ib >= (stack_b->top / 2))
@@ -49,14 +50,14 @@ static int  count_rotations(t_stack *stack_a, t_stack *stack_b, int num)
 		count = ia + 1 + stack_b->top - ib + 1;
 	else if (ia >= (stack_a->top / 2) && ib <= (stack_b->top / 2))
 		count = stack_a->top - ia + ib;
-	return(count + 1);
+	return (count + 1);
 }
 
 static int	cheaper_num(t_stack *stack_a, t_stack *stack_b)
 {
 	int	s_t;
 	int	c;
-	int index;
+	int	index;
 	int	c2;
 
 	s_t = stack_a->top;
@@ -65,7 +66,7 @@ static int	cheaper_num(t_stack *stack_a, t_stack *stack_b)
 	s_t--;
 	while (s_t >= 0 && c != 1)
 	{
-		int	c2 = count_rotations(stack_a, stack_b, stack_a->num_arr[s_t]);
+		c2 = count_rotations(stack_a, stack_b, stack_a->num_arr[s_t]);
 		if (c > c2)
 		{
 			c = c2;
@@ -76,15 +77,14 @@ static int	cheaper_num(t_stack *stack_a, t_stack *stack_b)
 	return (stack_a->num_arr[index]);
 }
 
-void    sort_big(t_stack *stack_a, t_stack *stack_b)
+void	sort_big(t_stack *stack_a, t_stack *stack_b)
 {
-	int s_t_a;
+	int	s_t_a;
 	int	cheaper;
 	int	s_t_b;
 
 	repeat_pb(stack_a, stack_b, 2);
 	s_t_a = stack_a->top;
-	
 	while (s_t_a >= 3)
 	{
 		cheaper = cheaper_num(stack_a, stack_b);

@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 18:53:28 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/23 19:48:09 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/23 23:43:59 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	rotate_with_rr(t_stack *stack_a, t_stack *stack_b, int ia, int ib)
 {
 	int	ra;
-	int rb;
-	
+	int	rb;
+
 	ra = stack_a->top - ia;
 	rb = stack_b->top - ib + 1;
 	if (ra <= rb)
@@ -34,8 +34,8 @@ void	rotate_with_rr(t_stack *stack_a, t_stack *stack_b, int ia, int ib)
 void	rotate_with_rrr(t_stack *stack_a, t_stack *stack_b, int ia, int ib)
 {
 	int	rra;
-	int rrb;
-	
+	int	rrb;
+
 	rra = ia + 1;
 	rrb = ib;
 	if (rra <= rrb)
@@ -52,7 +52,7 @@ void	rotate_with_rrr(t_stack *stack_a, t_stack *stack_b, int ia, int ib)
 
 void	rotate_with_ra_rrb(t_stack *stack_a, t_stack *stack_b, int ia, int ib)
 {
-	int ra;
+	int	ra;
 	int	rrb;
 
 	ra = stack_a->top - ia;
@@ -63,7 +63,7 @@ void	rotate_with_ra_rrb(t_stack *stack_a, t_stack *stack_b, int ia, int ib)
 
 void	rotate_with_rra_rb(t_stack *stack_a, t_stack *stack_b, int ia, int ib)
 {
-	int rra;
+	int	rra;
 	int	rb;
 
 	rra = ia + 1;
