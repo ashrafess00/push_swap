@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_stacks.c                                     :+:      :+:    :+:   */
+/*   print_stacks_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 17:16:59 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/23 19:48:09 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/23 19:44:08 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "my_header.h"
+#include "bonus_header.h"
 
 void	print_stacks(t_stack stack_a, t_stack stack_b)
 {
@@ -35,5 +35,5 @@ void	print_stacks(t_stack stack_a, t_stack stack_b)
 		printf("\n");
 		bigger--;
 	}
-	printf("--------\t--------\nstack_a\t\tstack_b\n");
+	ft_printf("--------\t--------\nstack_a\t\tstack_b\n");
 }

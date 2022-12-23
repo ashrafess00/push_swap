@@ -6,11 +6,11 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:00:06 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/22 19:36:56 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/23 19:48:09 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/my_header.h"
+#include "my_header.h"
 
 static int	find_max(t_stack *stack)
 {
@@ -22,7 +22,7 @@ static int	find_max(t_stack *stack)
 	max = stack->num_arr[s_t];
 	while (s_t >= 0)
 	{
-		int	s_tt = s_t - 1;
+		s_tt = s_t - 1;
 		while (s_tt >= 0)
 		{
 			if (max < stack->num_arr[s_tt])
@@ -31,8 +31,9 @@ static int	find_max(t_stack *stack)
 		}
 		s_t--;
 	}
-	return(max);
+	return (max);
 }
+
 int	find_min(t_stack *stack)
 {
 	int	min;
@@ -43,7 +44,7 @@ int	find_min(t_stack *stack)
 	min = stack->num_arr[s_t];
 	while (s_t >= 0)
 	{
-		int	s_tt = s_t - 1;
+		s_tt = s_t - 1;
 		while (s_tt >= 0)
 		{
 			if (min > stack->num_arr[s_tt])
@@ -52,10 +53,10 @@ int	find_min(t_stack *stack)
 		}
 		s_t--;
 	}
-	return(min);
+	return (min);
 }
 
-int a_pos_in_a(t_stack *stack_a, int num)
+int	a_pos_in_a(t_stack *stack_a, int num)
 {
 	int	i;
 

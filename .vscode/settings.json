@@ -5,6 +5,7 @@
         "chrono": "c",
         "limits": "c",
         "random": "c",
-        "ratio": "c"
+        "ratio": "c",
+        "libft.h": "c"
     }
 }
