@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 16:32:34 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/26 11:47:17 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/26 12:18:49 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,4 @@ int	main(int c, char **args)
 	else
 		sort_big(&stack_a, &stack_b);
 	free_stacks(&stack_a, &stack_b);
-	check_leaks();
 }

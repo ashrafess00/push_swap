@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 13:44:43 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/25 20:24:47 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/26 12:19:24 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,4 @@ int	main(int c, char **args)
 	else
 		ft_printf("KO\n");
 	free_stacks(&stack_a, &stack_b);
-	check_leaks();
 }

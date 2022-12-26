@@ -6,7 +6,7 @@
 #    By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/22 16:27:55 by aessaoud          #+#    #+#              #
-#    Updated: 2022/12/25 17:22:10 by aessaoud         ###   ########.fr        #
+#    Updated: 2022/12/26 12:19:10 by aessaoud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,8 @@ BONUS_OBJS_DIR=bonus_objs/
 SRCS_DIR=srcs/
 BONUS_SRCS_DIR=bonus/
 
-SRCS_LIST=main.c check_args.c check_args_2.c instructions1.c instructions2.c print_stacks.c sort_3.c repeat_instructions.c sort_big.c rotate_with.c find_pos.c push_all_to_a_b.c free_all.c initiate_stacks.c errors.c ../leacks_cheker_ex.c
-BONUS_SRCS_LIST=main.c check_args_bonus.c check_args_2_bonus.c instructions1_bonus.c instructions2_bonus.c print_stacks_bonus.c free_all_bonus.c sort_bonus.c initiate_stacks_bonus.c errors_bonus.c ../leacks_cheker_ex.c
+SRCS_LIST=main.c check_args.c check_args_2.c instructions1.c instructions2.c print_stacks.c sort_3.c repeat_instructions.c sort_big.c rotate_with.c find_pos.c push_all_to_a_b.c free_all.c initiate_stacks.c errors.c
+BONUS_SRCS_LIST=main.c check_args_bonus.c check_args_2_bonus.c instructions1_bonus.c instructions2_bonus.c print_stacks_bonus.c free_all_bonus.c sort_bonus.c initiate_stacks_bonus.c errors_bonus.c
 
 
 OBJ_LIST=$(SRCS_LIST:.c=.o)
