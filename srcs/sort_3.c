@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 20:02:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/23 23:42:08 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/24 22:19:04 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	sort_3(t_stack *sa)
 {
 	int	top_a;
-	int	top_b;
 
 	top_a = sa->top;
 	if (sa->num_arr[2] > sa->num_arr[1] && sa->num_arr[2] < sa->num_arr[0])

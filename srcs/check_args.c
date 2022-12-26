@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:26:22 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/23 23:31:27 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/25 17:26:36 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static int	is_big(char **numbers)
 {
 	int	i;
 	int	num_count;
-	int	j;
 
 	i = -1;
 	while (numbers[++i])
@@ -72,7 +71,7 @@ static int	is_big(char **numbers)
 	return (0);
 }
 
-static int	is_empty(char *arg)
+int	is_empty(char *arg)
 {
 	int	i;
 
@@ -93,24 +92,20 @@ char	**get_args(int c, char **args)
 	char	**numbers;
 	int		i;
 
-	if (c >= 2)
+	numbers_string = ft_calloc(1, 1);
+	i = 1;
+	while (i < c)
 	{
-		numbers_string = ft_calloc(1, 1);
-		i = 1;
-		while (i < c)
-		{
-			if (is_empty(args[i]))
-				return (0);
-			numbers_string = ft_strjoin(numbers_string, ft_strdup(" "));
-			numbers_string = ft_strjoin(numbers_string, ft_strdup(args[i]));
-			i++;
-		}
-		free(numbers_string);
-		if (!is_number(numbers_string))
-			return (0);
-		numbers = ft_split(numbers_string, ' ');
-		if (is_duplicated(numbers) || is_big(numbers))
-			return (0);
+		if (is_empty(args[i]))
+			write_error_1(numbers_string);
+		numbers_string = ft_strjoin(numbers_string, ft_strdup(" "));
+		numbers_string = ft_strjoin(numbers_string, ft_strdup(args[i]));
+		i++;
 	}
+	if (!is_number(numbers_string))
+		write_error_1(numbers_string);
+	numbers = ft_split(numbers_string, ' ');
+	if (is_duplicated(numbers) || is_big(numbers))
+		write_error_2(numbers);
 	return (numbers);
 }

@@ -6,11 +6,11 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 19:10:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/23 23:26:12 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/25 16:13:31 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bonus_header.h"
+#include "my_header_bonus.h"
 
 void	swap(t_stack *stack)
 {
@@ -54,31 +54,4 @@ void	push_b(t_stack *stack_a, t_stack *stack_b)
 		stack_b->num_arr[stack_b->top] = stack_a->num_arr[stack_a->top];
 		stack_a->top -= 1;
 	}
-}
-
-void	rotate(t_stack *stack)
-{
-	int	last_num;
-	int	i;
-
-	last_num = stack->num_arr[stack->top];
-	i = stack->top + 1;
-	while (i-- > 0)
-		stack->num_arr[i] = stack->num_arr[i - 1];
-	stack->num_arr[0] = last_num;
-}
-
-void	reverse_rotate(t_stack *stack)
-{
-	int	first_num;
-	int	i;
-
-	first_num = stack->num_arr[0];
-	i = 0;
-	while (i < stack->top)
-	{
-		stack->num_arr[i] = stack->num_arr[i + 1];
-		i++;
-	}
-	stack->num_arr[stack->top] = first_num;
 }

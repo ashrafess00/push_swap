@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_all_bonus.c                                   :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/23 22:25:37 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/25 20:07:25 by aessaoud         ###   ########.fr       */
+/*   Created: 2022/12/25 16:56:47 by aessaoud          #+#    #+#             */
+/*   Updated: 2022/12/25 17:23:35 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "my_header_bonus.h"
+#include "my_header.h"
 
-void	free_stacks(t_stack *stack_a, t_stack *stack_b)
+void	write_error_1(char *numbers_string)
 {
-	free(stack_a->num_arr);
-	free(stack_b->num_arr);
+	write (2, "ERROR", 5);
+	free(numbers_string);
+	exit(0);
 }
 
-void	free_arrs(char **s)
+void	write_error_2(char **numbers)
 {
-	int	i;
-
-	i = -1;
-	while (s[++i])
-		free(s[i]);
-	free(s);
+	write (2, "ERROR", 5);
+	free_arrs(numbers);
+	exit(0);
 }
