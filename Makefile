@@ -6,7 +6,7 @@
 #    By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/22 16:27:55 by aessaoud          #+#    #+#              #
-#    Updated: 2022/12/26 12:19:10 by aessaoud         ###   ########.fr        #
+#    Updated: 2022/12/27 14:10:08 by aessaoud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,8 +31,8 @@ SRCS_LIST=main.c check_args.c check_args_2.c instructions1.c instructions2.c pri
 BONUS_SRCS_LIST=main.c check_args_bonus.c check_args_2_bonus.c instructions1_bonus.c instructions2_bonus.c print_stacks_bonus.c free_all_bonus.c sort_bonus.c initiate_stacks_bonus.c errors_bonus.c
 
 
-OBJ_LIST=$(SRCS_LIST:.c=.o)
-OBJS=$(addprefix $(OBJS_DIR), $(OBJ_LIST))
+# OBJ_LIST=$(SRCS_LIST:.c=.o)
+OBJS=$(addprefix $(OBJS_DIR), $(SRCS_LIST:.c=.o))
 
 BONUS_OBJ_LIST=$(BONUS_SRCS_LIST:.c=.o)
 BONUS_OBJS=$(addprefix $(BONUS_OBJS_DIR), $(BONUS_OBJ_LIST))

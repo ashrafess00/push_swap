@@ -6,13 +6,11 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 16:32:34 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/26 12:18:49 by aessaoud         ###   ########.fr       */
+/*   Updated: 2022/12/27 19:37:01 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_header.h"
-
-void	check_leaks(void);
 
 int	count_numbers(char **s)
 {
