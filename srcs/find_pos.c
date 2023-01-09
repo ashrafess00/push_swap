@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:00:06 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/23 19:48:09 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/09 16:02:40 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,13 @@ static int	find_max(t_stack *stack)
 {
 	int	max;
 	int	s_t;
-	int	s_tt;
 
 	s_t = stack->top;
 	max = stack->num_arr[s_t];
-	while (s_t >= 0)
+	while (--s_t >= 0)
 	{
-		s_tt = s_t - 1;
-		while (s_tt >= 0)
-		{
-			if (max < stack->num_arr[s_tt])
-				max = stack->num_arr[s_tt];
-			s_tt--;
-		}
-		s_t--;
+		if (stack->num_arr[s_t] > max)
+			max = stack->num_arr[s_t];
 	}
 	return (max);
 }

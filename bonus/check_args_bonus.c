@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:26:22 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/25 20:08:34 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/09 17:15:39 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static int	is_big(char **numbers)
 {
 	int	i;
 	int	num_count;
-	int	j;
 
 	i = -1;
 	while (numbers[++i])

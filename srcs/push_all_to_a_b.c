@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:12:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/23 23:44:56 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/09 16:58:46 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ void	push_all_2_a(t_stack *stack_a, t_stack *stack_b, int num)
 	push_a(stack_a, stack_b);
 }
 
-void	push_all_2_b(t_stack *stack_a, t_stack *stack_b, int num)
+void	push_all_2_b(t_stack *stack_a, t_stack *stack_b, t_pos pos)
 {
 	int	ia;
 	int	ib;
 
-	ia = a_pos_in_a(stack_a, num);
-	ib = a_pos_in_b(stack_b, num);
+	ia = pos.a_pos_in_a;
+	ib = pos.a_pos_in_b;
 	if (ia >= (stack_a->top / 2) && ib >= (stack_b->top / 2))
 		rotate_with_rr(stack_a, stack_b, ia, ib);
 	else if (ia <= (stack_a->top / 2) && ib <= (stack_b->top / 2))

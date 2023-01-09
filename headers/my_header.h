@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 12:26:15 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/25 20:34:05 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/09 17:03:57 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,20 @@ typedef struct s_stack
 	int	*num_arr;
 	int	which_stack;
 }	t_stack;
+
+typedef struct s_top
+{
+	int	top_a;
+	int	top_b;
+}	t_top;
+
+typedef struct s_position
+{
+	int	a_pos_in_a;
+	int	a_pos_in_b;
+	int	a_pos_in_a_tmp;
+	int	a_pos_in_b_tmp;
+}	t_pos;
 
 void	swap(t_stack *stack);
 void	swap_both(t_stack *stack_a, t_stack *stack_b);
@@ -49,11 +63,10 @@ int		a_pos_in_a(t_stack *stack_a, int num);
 int		a_pos_in_b(t_stack *stack_b, int num);
 int		b_pos_in_a(t_stack *stack_a, int num);
 void	push_all_2_a(t_stack *stack_a, t_stack *stack_b, int num);
-void	push_all_2_b(t_stack *stack_a, t_stack *stack_b, int num);
+void	push_all_2_b(t_stack *stack_a, t_stack *stack_b, t_pos pos);
 int		find_min(t_stack *stack);
 int		count_numbers(char **s);
 int		is_a_sorted(t_stack *stack_a);
-void	check_leaks(void);
 int		is_duplicated(char **nums);
 int		is_number(char *s);
 void	free_arrs(char **s);
