@@ -6,7 +6,7 @@
 #    By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/22 16:27:55 by aessaoud          #+#    #+#              #
-#    Updated: 2023/01/09 17:48:08 by aessaoud         ###   ########.fr        #
+#    Updated: 2023/01/09 17:56:28 by aessaoud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,5 +84,4 @@ re: fclean all
 
 norm:
 	norminette $(SRCS_DIR) $(HEADERS_DIR) $(LIBFT_DIR) $(BONUS_SRCS_DIR)
-	
 .PHONY:bonus check clean fclean norm
