@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 22:52:15 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/15 19:06:28 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/15 21:03:37 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ void	initiate_stacks(t_stacks *stacks, t_arrays *arrays, int *numbers)
 		push(stacks, numbers[i], 'a');
 		arrays->numbers_a[arrays->top_a] = numbers[i];
 		i++;
+	}
+	if (is_a_sorted(arrays))
+	{
+		free_stacks_arrays(stacks, arrays);
+		free_elements(NULL, NULL, NULL, numbers);
+		exit(0);
 	}
 	free_elements(NULL, NULL, NULL, numbers);
 }
