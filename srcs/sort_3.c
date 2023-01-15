@@ -6,33 +6,35 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 20:02:31 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/24 22:19:04 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/15 19:07:01 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/my_header.h"
+#include "my_header.h"
 
-void	sort_3(t_stack *sa)
+void	sort_3(t_stacks *stacks, t_arrays *arrs)
 {
-	int	top_a;
-
-	top_a = sa->top;
-	if (sa->num_arr[2] > sa->num_arr[1] && sa->num_arr[2] < sa->num_arr[0])
-		swap(sa);
-	else if (sa->num_arr[2] > sa->num_arr[1] && sa->num_arr[1] > sa->num_arr[0])
+	if (arrs->numbers_a[2] > arrs->numbers_a[1]
+		&& arrs->numbers_a[2] < arrs->numbers_a[0])
+		swap_a(stacks, arrs, 1);
+	else if (arrs->numbers_a[2] > arrs->numbers_a[1]
+		&& arrs->numbers_a[1] > arrs->numbers_a[0])
 	{
-		swap(sa);
-		reverse_rotate(sa);
+		swap_a(stacks, arrs, 1);
+		reverse_rotate_a(stacks, arrs, 1);
 	}
-	else if (sa->num_arr[2] > sa->num_arr[1] && sa->num_arr[1] < sa->num_arr[2])
-		rotate(sa);
-	else if (sa->num_arr[2] < sa->num_arr[1]
-		&& sa->num_arr[1] > sa->num_arr[0] && sa->num_arr[2] < sa->num_arr[0])
+	else if (arrs->numbers_a[2] > arrs->numbers_a[1]
+		&& arrs->numbers_a[1] < arrs->numbers_a[2])
+		rotate_a(stacks, arrs, 1);
+	else if (arrs->numbers_a[2] < arrs->numbers_a[1]
+		&& arrs->numbers_a[1] > arrs->numbers_a[0]
+		&& arrs->numbers_a[2] < arrs->numbers_a[0])
 	{
-		swap(sa);
-		rotate(sa);
+		swap_a(stacks, arrs, 1);
+		rotate_a(stacks, arrs, 1);
 	}
-	else if (sa->num_arr[2] < sa->num_arr[1]
-		&& sa->num_arr[1] > sa->num_arr[0] && sa->num_arr[2] > sa->num_arr[0])
-		reverse_rotate(sa);
+	else if (arrs->numbers_a[2] < arrs->numbers_a[1]
+		&& arrs->numbers_a[1] > arrs->numbers_a[0]
+		&& arrs->numbers_a[2] > arrs->numbers_a[0])
+		reverse_rotate_a(stacks, arrs, 1);
 }

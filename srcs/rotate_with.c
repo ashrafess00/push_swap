@@ -6,32 +6,32 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 18:53:28 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/23 23:43:59 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/15 00:08:44 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_header.h"
 
-void	rotate_with_rr(t_stack *stack_a, t_stack *stack_b, int ia, int ib)
+void	rotate_with_rr(t_stacks *stacks, t_arrays *arrays, int ia, int ib)
 {
 	int	ra;
 	int	rb;
 
-	ra = stack_a->top - ia;
-	rb = stack_b->top - ib + 1;
+	ra = arrays->top_a - ia;
+	rb = arrays->top_b - ib + 1;
 	if (ra <= rb)
 	{
-		repeat_rr(stack_a, stack_b, ra);
-		repeat_rotate(stack_b, rb - ra);
+		repeat_rr(stacks, arrays, ra);
+		repeat_rotate_b(stacks, arrays, rb - ra);
 	}
 	else
 	{
-		repeat_rr(stack_a, stack_b, rb);
-		repeat_rotate(stack_a, ra - rb);
+		repeat_rr(stacks, arrays, rb);
+		repeat_rotate_a(stacks, arrays, ra - rb);
 	}
 }
 
-void	rotate_with_rrr(t_stack *stack_a, t_stack *stack_b, int ia, int ib)
+void	rotate_with_rrr(t_stacks *stacks, t_arrays *arrays, int ia, int ib)
 {
 	int	rra;
 	int	rrb;
@@ -40,34 +40,34 @@ void	rotate_with_rrr(t_stack *stack_a, t_stack *stack_b, int ia, int ib)
 	rrb = ib;
 	if (rra <= rrb)
 	{
-		repeat_rrr(stack_a, stack_b, rra);
-		repeat_reverse_rotate(stack_b, rrb - rra);
+		repeat_rrr(stacks, arrays, rra);
+		repeat_reverse_rotate_b(stacks, arrays, rrb - rra);
 	}
 	else
 	{
-		repeat_rrr(stack_a, stack_b, rrb);
-		repeat_reverse_rotate(stack_a, rra - rrb);
+		repeat_rrr(stacks, arrays, rrb);
+		repeat_reverse_rotate_a(stacks, arrays, rra - rrb);
 	}
 }
 
-void	rotate_with_ra_rrb(t_stack *stack_a, t_stack *stack_b, int ia, int ib)
+void	rotate_with_ra_rrb(t_stacks *stacks, t_arrays *arrays, int ia, int ib)
 {
 	int	ra;
 	int	rrb;
 
-	ra = stack_a->top - ia;
+	ra = arrays->top_a - ia;
 	rrb = ib;
-	repeat_rotate(stack_a, ra);
-	repeat_reverse_rotate(stack_b, rrb);
+	repeat_rotate_a(stacks, arrays, ra);
+	repeat_reverse_rotate_b(stacks, arrays, rrb);
 }
 
-void	rotate_with_rra_rb(t_stack *stack_a, t_stack *stack_b, int ia, int ib)
+void	rotate_with_rra_rb(t_stacks *stacks, t_arrays *arrays, int ia, int ib)
 {
 	int	rra;
 	int	rb;
 
 	rra = ia + 1;
-	rb = stack_b->top - ib + 1;
-	repeat_reverse_rotate(stack_a, rra);
-	repeat_rotate(stack_b, rb);
+	rb = arrays->top_b - ib + 1;
+	repeat_reverse_rotate_a(stacks, arrays, rra);
+	repeat_rotate_b(stacks, arrays, rb);
 }

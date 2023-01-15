@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/23 16:58:24 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/23 16:58:43 by aessaoud         ###   ########.fr       */
+/*   Created: 2023/01/15 15:55:41 by aessaoud          #+#    #+#             */
+/*   Updated: 2023/01/15 18:57:42 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "my_header_bonus.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
@@ -30,4 +30,37 @@ int	ft_strcmp(const char *s1, const char *s2)
 		i++;
 	}
 	return (0);
+}
+
+static int	is_ws(char n)
+{
+	if (n == '\t' || n == '\n' || n == ' '
+		|| n == '\v' || n == '\f' || n == '\r')
+		return (1);
+	return (0);
+}
+
+long long	ft_atoi_long(const char *str)
+{
+	size_t	sign;
+	size_t	i;
+	size_t	num;
+
+	sign = 1;
+	i = 0;
+	num = 0;
+	while (is_ws(str[i]))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign = -1;
+		i++;
+	}
+	while (ft_isdigit(str[i]))
+	{
+		num = num * 10 + str[i] - 48;
+		i++;
+	}
+	return (num * sign);
 }

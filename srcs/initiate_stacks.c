@@ -6,36 +6,31 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 22:52:15 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/08 23:46:07 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/15 19:06:28 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_header.h"
 
-void	initiate_stacks(t_stack *stack_a, t_stack *stack_b, char **nums, int s)
+void	initiate_stacks(t_stacks *stacks, t_arrays *arrays, int *numbers)
 {
-	int	num;
-	int	i;
+	int			i;
 
-	stack_a->top = -1;
-	stack_b->top = -1;
-	stack_a->num_arr = malloc(s * sizeof(int));
-	stack_b->num_arr = malloc(s * sizeof(int));
-	stack_a->which_stack = 1;
-	stack_b->which_stack = 0;
-	num = 0;
-	i = -1;
-	while (--s >= 0)
+	stacks->top_a = -1;
+	stacks->top_b = -1;
+	arrays->top_a = -1;
+	arrays->top_b = -1;
+	stacks->numbers_a = malloc(numbers[0] * sizeof(int));
+	stacks->numbers_b = malloc(numbers[0] * sizeof(int));
+	arrays->numbers_a = malloc(numbers[0] * sizeof(int));
+	arrays->numbers_b = malloc(numbers[0] * sizeof(int));
+	i = 1;
+	while (i <= numbers[0])
 	{
-		stack_a->top++;
-		num = ft_atoi(nums[s]);
-		stack_a->num_arr[stack_a->top] = num;
+		arrays->top_a++;
+		push(stacks, numbers[i], 'a');
+		arrays->numbers_a[arrays->top_a] = numbers[i];
+		i++;
 	}
-	if (is_a_sorted(stack_a))
-	{
-		free_stacks(stack_a, stack_b);
-		free_arrs(nums);
-		exit(0);
-	}
-	free_arrs(nums);
+	free_elements(NULL, NULL, NULL, numbers);
 }

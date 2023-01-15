@@ -6,37 +6,28 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 16:32:34 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/09 17:02:00 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/15 20:05:45 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_header.h"
 
-int	count_numbers(char **s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
 int	main(int c, char **args)
 {
-	char	**numbers;
-	int		numbers_count;
-	t_stack	stack_a;
-	t_stack	stack_b;
+	int			*numbers;
+	int			numbers_count;
+	t_stacks	stacks;
+	t_arrays	arrays;
 
 	numbers = get_args(c, args);
-	numbers_count = count_numbers(numbers);
-	initiate_stacks(&stack_a, &stack_b, numbers, numbers_count);
-	if (stack_a.top == 1 && (stack_a.num_arr[0] < stack_a.num_arr[1]))
-		swap(&stack_a);
-	else if (stack_a.top == 2)
-		sort_3(&stack_a);
+	initiate_stacks(&stacks, &arrays, numbers);
+	if (stacks.top_a == 1 && (stacks.numbers_a[0] < stacks.numbers_a[1]))
+		swap_a(&stacks, &arrays, 1);
+	if (arrays.top_a == 1 && (arrays.numbers_a[0] < arrays.numbers_a[1]))
+		swap_a(&stacks, &arrays, 1);
+	else if (arrays.top_a == 2)
+		sort_3(&stacks, &arrays);
 	else
-		sort_big(&stack_a, &stack_b);
-	free_stacks(&stack_a, &stack_b);
+		sort_big(&stacks, &arrays);
+	free_stacks_arrays(&stacks, &arrays);
 }

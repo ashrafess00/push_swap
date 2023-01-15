@@ -5,23 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/25 16:56:47 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/25 17:23:35 by aessaoud         ###   ########.fr       */
+/*   Created: 2022/12/25 17:17:46 by aessaoud          #+#    #+#             */
+/*   Updated: 2023/01/15 20:05:40 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_header.h"
 
-void	write_error_1(char *numbers_string)
+void	write_error(char *s1, char *s2, char **s3, int *nums)
 {
 	write (2, "ERROR", 5);
-	free(numbers_string);
-	exit(0);
-}
-
-void	write_error_2(char **numbers)
-{
-	write (2, "ERROR", 5);
-	free_arrs(numbers);
+	free_elements(s1, s2, s3, nums);
 	exit(0);
 }

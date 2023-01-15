@@ -1,38 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_stacks.c                                     :+:      :+:    :+:   */
+/*   repeat_instructions1.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/20 17:16:59 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/23 23:45:53 by aessaoud         ###   ########.fr       */
+/*   Created: 2022/12/19 17:39:09 by aessaoud          #+#    #+#             */
+/*   Updated: 2023/01/15 01:33:35 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_header.h"
 
-void	print_stacks(t_stack stack_a, t_stack stack_b)
+void	repeat_pb(t_stacks *stacks, t_arrays *arrays, int c)
 {
-	int	a;
-	int	b;
-	int	bigger;
-
-	a = stack_a.top;
-	b = stack_b.top;
-	if (a >= b)
-		bigger = a;
-	else
-		bigger = b;
-	while (bigger >= 0)
+	while (c > 0)
 	{
-		if (stack_a.top >= bigger)
-			ft_printf("%d", stack_a.num_arr[bigger]);
-		ft_printf("\t\t");
-		if (stack_b.top >= bigger)
-			printf("%d", stack_b.num_arr[bigger]);
-		ft_printf("\n");
-		bigger--;
+		push_b(stacks, arrays, 1);
+		c--;
 	}
-	ft_printf("--------\t--------\nstack_a\t\tstack_b\n");
+}
+
+void	repeat_rotate_a(t_stacks *stacks, t_arrays *arrays, int c)
+{
+	while (c > 0)
+	{
+		rotate_a(stacks, arrays, 1);
+		c--;
+	}
+}
+
+void	repeat_rotate_b(t_stacks *stacks, t_arrays *arrays, int c)
+{
+	while (c > 0)
+	{
+		rotate_b(stacks, arrays, 1);
+		c--;
+	}
 }

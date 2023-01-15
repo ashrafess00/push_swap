@@ -6,19 +6,13 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 22:25:37 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/25 17:14:26 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/15 19:06:25 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_header.h"
 
-void	free_stacks(t_stack *stack_a, t_stack *stack_b)
-{
-	free(stack_a->num_arr);
-	free(stack_b->num_arr);
-}
-
-void	free_arrs(char **s)
+static void	free_arrs_str(char **s)
 {
 	int	i;
 
@@ -26,4 +20,34 @@ void	free_arrs(char **s)
 	while (s[++i])
 		free(s[i]);
 	free(s);
+}
+
+static void	free_arrs_int(int **nums)
+{
+	int	i;
+
+	i = -1;
+	while (nums[++i])
+		free (nums[i]);
+	free (nums);
+}
+
+void	free_stacks_arrays(t_stacks *stacks, t_arrays *arrays)
+{
+	free(stacks->numbers_a);
+	free(stacks->numbers_b);
+	free(arrays->numbers_a);
+	free(arrays->numbers_b);
+}
+
+void	free_elements(char *s1, char *s2, char **s3, int *nums)
+{
+	if (s1)
+		free (s1);
+	if (s2)
+		free (s2);
+	if (s3)
+		free_arrs_str (s3);
+	if (nums)
+		free (nums);
 }
