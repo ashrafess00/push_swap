@@ -6,7 +6,7 @@
 #    By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/22 16:27:55 by aessaoud          #+#    #+#              #
-#    Updated: 2023/01/15 20:11:21 by aessaoud         ###   ########.fr        #
+#    Updated: 2023/01/18 12:59:49 by aessaoud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ RM=rm -rf
 
 INC=-I./headers/
 BONUS_NAME=checker
-ARGS=  12 13 14
+ARGS= 88 16 75 89 60 57 79 77 80 13 46 78 47 40 35 86 94 33 4 20 18 45 23 19 55 96 7 64 42 90 51 73 10 50 70 53 43 14 84 95 83 66 30 71 82 39 98 2 9 100 25 28 48 92 68 32 29 85 97 72 74 37 69 11 91 3 49 6 41 1 22 61 27 56 62 34 26 0 17 44 93 12 67 81 24 76 54 63 52 59 15 5 8 99 87 38 58 31 36 65
 
 LIBFT_DIR=libft/
 LIBFT_A=$(LIBFT_DIR)libft.a
@@ -70,6 +70,9 @@ $(BONUS_OBJS_DIR)%.o:$(BONUS_SRCS_DIR)%.c
 
 check: all
 	./$(NAME) $(ARGS) | ./checker_Mac $(ARGS)
+
+check_ins:
+	./$(NAME) $(ARGS) | wc -l
 	
 clean:
 	make clean -C $(LIBFT_DIR)
@@ -85,4 +88,5 @@ re: fclean all
 
 norm:
 	norminette $(SRCS_DIR) $(HEADERS_DIR) $(LIBFT_DIR) $(BONUS_SRCS_DIR)
+	
 .PHONY:bonus check clean fclean norm

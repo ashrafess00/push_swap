@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 16:32:34 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/15 20:05:45 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/18 12:36:40 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int c, char **args)
 	initiate_stacks(&stacks, &arrays, numbers);
 	if (stacks.top_a == 1 && (stacks.numbers_a[0] < stacks.numbers_a[1]))
 		swap_a(&stacks, &arrays, 1);
-	if (arrays.top_a == 1 && (arrays.numbers_a[0] < arrays.numbers_a[1]))
+	else if (arrays.top_a == 1 && (arrays.numbers_a[0] < arrays.numbers_a[1]))
 		swap_a(&stacks, &arrays, 1);
 	else if (arrays.top_a == 2)
 		sort_3(&stacks, &arrays);
