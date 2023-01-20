@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 17:51:40 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/15 16:42:57 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/20 21:47:06 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	swap_a(t_stacks *stacks, t_arrays *arrays, int print)
 {
-	int	num1;
-	int	num2;
 	int	tmp;
 
 	pop(stacks, 'a');
@@ -31,8 +29,6 @@ void	swap_a(t_stacks *stacks, t_arrays *arrays, int print)
 
 void	swap_b(t_stacks *stacks, t_arrays *arrays, int print)
 {
-	int	num1;
-	int	num2;
 	int	tmp;
 
 	pop(stacks, 'b');

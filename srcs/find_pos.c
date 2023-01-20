@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:00:06 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/15 00:09:54 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/20 21:45:04 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static int	find_max(t_arrays *arrays, char stack)
 	int	max;
 	int	s_t;
 
+	max = 0;
 	if (stack == 'a')
 	{
 		s_t = arrays->top_a;
@@ -45,6 +46,7 @@ int	find_min(t_arrays *arrays, char stack)
 	int	min;
 	int	s_t;
 
+	min = 0;
 	if (stack == 'a')
 	{
 		s_t = arrays->top_a;

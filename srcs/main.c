@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 16:32:34 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/18 12:36:40 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/19 18:07:17 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	main(int c, char **args)
 {
 	int			*numbers;
-	int			numbers_count;
 	t_stacks	stacks;
 	t_arrays	arrays;
 

@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 22:25:37 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/15 18:46:42 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/20 21:47:28 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,6 @@ static void	free_arrs_str(char **s)
 	while (s[++i])
 		free(s[i]);
 	free(s);
-}
-
-static void	free_arrs_int(int **nums)
-{
-	int	i;
-
-	i = -1;
-	while (nums[++i])
-		free (nums[i]);
-	free (nums);
 }
 
 void	free_stacks_arrays(t_stacks *stacks, t_arrays *arrays)

@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 18:38:14 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/15 19:07:06 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/20 21:44:14 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ static int	get_less_ins_i(t_arrays *arrays, t_pos *pos)
 void	sort_big(t_stacks *stacks, t_arrays *arrays)
 {
 	int		s_t_a;
-	int		less_ins_i;
 	int		s_t_b;
 	t_pos	pos;
 

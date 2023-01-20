@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 14:14:07 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/23 14:51:23 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/20 22:05:32 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,3 @@ void	ft_putendl_fd(char *s, int fd)
 		write (fd, &s[i], 1);
 	write (fd, "\n", 1);
 }
-
-// #include <fcntl.h>
-// int	main()
-// {
-// 	int	fd;
-// 	fd = open("mytxt3", O_RDWR | O_CREAT);
-// 	ft_putendl_fd("", fd);
-// 	printf("%d", fd);
-// }

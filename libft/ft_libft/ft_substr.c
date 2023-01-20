@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 20:07:50 by aessaoud          #+#    #+#             */
-/*   Updated: 2022/12/23 14:51:23 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/20 22:06:30 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,3 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 	p[i] = '\0';
 	return (p);
 }
-
-// int	main()
-// {
-// 	printf("%s", ft_substr("ashraf", 0, 42000));
-// }

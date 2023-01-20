@@ -6,7 +6,7 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 13:44:43 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/15 20:03:56 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/20 21:46:35 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	main(int c, char **args)
 	int			*numbers;
 	t_stacks	stacks;
 	t_arrays	arrays;
-	int			number_count;
 
 	numbers = get_args(c, args);
 	instructions = read_input(numbers);

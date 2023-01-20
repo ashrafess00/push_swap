@@ -6,14 +6,13 @@
 /*   By: aessaoud <aessaoud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 19:12:54 by aessaoud          #+#    #+#             */
-/*   Updated: 2023/01/15 20:10:14 by aessaoud         ###   ########.fr       */
+/*   Updated: 2023/01/20 21:51:35 by aessaoud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MY_HEADER_BONUS_H
 # define MY_HEADER_BONUS_H
 # include "../libft/libft.h"
-# include <stdio.h>
 
 typedef struct s_stacks
 {
